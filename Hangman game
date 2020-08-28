@@ -1,0 +1,277 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <ctime>
+#include <cctype>
+#include<conio.h>
+using namespace std;
+
+class G
+{
+private:
+       string THE_WORD;            // word to guess
+       string soFar;
+       string used;
+  int wrong;
+    vector<string> words;  // collection of possible words to guess
+public:
+G()
+{
+wrong=0;
+    words.push_back("COMPUTER");
+    words.push_back("SCIENCE");
+    words.push_back("ENGINEERING");
+    words.push_back("VNRVJIET");
+    words.push_back("SILICON");
+    words.push_back("PATRONS");
+    words.push_back("ELECTICAL");
+    words.push_back("LIBRARY");
+    words.push_back("ANAPURNA");
+
+}
+       bool match(char letter, string word);
+       char askGuess(string usedLettersStr);          //tells the compiler of method askGuess
+       bool playAgain();
+       void Draw(int);
+       void f();
+};
+
+inline bool G::match(char letter, string word)
+{
+       return ( word.find(letter) != string::npos );
+}
+
+char G::askGuess(string usedLettersStr)
+{
+        char guess;
+        cout << "\n\nEnter your guess: ";
+        cin >> guess;
+        guess = toupper(guess); //make uppercase since secret word in uppercase
+//        while (used.find(guess) != string::npos)
+        while (match(guess, used))
+        {
+            cout << "\nYou've already guessed " << guess << endl;
+            cout << "Enter your guess: ";
+            cin >> guess;
+            guess = toupper(guess);
+        }
+
+ system("cls");
+//        if (THE_WORD.find(guess) != string::npos)
+        if (match(guess, THE_WORD))
+        {
+            cout << "That's right! " << guess << " is in the word.\n";
+
+            // update soFar to include newly guessed letter
+            for (int i = 0; i < THE_WORD.length(); ++i)
+                if (THE_WORD[i] == guess)
+                    soFar[i] = guess;
+        }
+        else
+        {
+            cout << "Sorry, " << guess << " isn't in the word.\n";
+            ++wrong;
+        }
+Draw(wrong);
+}
+
+bool G::playAgain() // function to play again while clearing system
+{
+     char again;
+     cout << "\n\nWould you like to play again? <y/n>: ";
+     cin >> again;
+
+     cin.clear(); //clear and ignore cin
+     cin.ignore();
+
+     again = toupper(again);
+
+     system("cls");
+
+     return (again == 'Y');
+}
+void G::Draw(int S)
+{
+ if(S==8)
+ {
+  // The \\ will translate as '\' because it is a special char
+  cout<<endl<<endl
+   <<"   ++======+     "<<endl
+   <<"   ||      |     "<<endl
+   <<"   ||      |     "<<endl
+   <<"   ||      O     "<<endl
+   <<"   ||     /|\\   "<<endl
+   <<"   ||     / \\  "<<endl
+   <<"   ||            "<<endl
+   <<"   ||  Your Dead "<<endl
+   <<"  ================"<<endl<<endl;
+ }
+ else if(S==7)
+ {
+cout<<endl<<endl
+   <<"   ++======+     "<<endl
+   <<"   ||      |     "<<endl
+   <<"   ||      |     "<<endl
+   <<"   ||      O     "<<endl
+   <<"   ||     /|\\    "<<endl
+   <<"   ||     / \\    "<<endl
+   <<"   ||   |IIIII|  "<<endl
+   <<"   ||   |     |  "<<endl
+   <<"  ==============="<<endl<<endl;
+ }
+ else if(S==6)
+ {
+  cout<<endl<<endl
+   <<"   ++======+     "<<endl
+   <<"   ||      |     "<<endl
+   <<"   ||           "<<endl
+   <<"   ||      O     "<<endl
+   <<"   ||     /|\\    "<<endl
+   <<"   ||     / \\    "<<endl
+   <<"   ||   |IIIII|  "<<endl
+   <<"   ||   |     |  "<<endl
+   <<"  ==============="<<endl<<endl;
+ }
+ else if(S==5)
+ {
+ cout<<endl<<endl
+   <<"   ++======+     "<<endl
+   <<"   ||            "<<endl
+   <<"   ||           "<<endl
+   <<"   ||      O     "<<endl
+   <<"   ||     /|\\    "<<endl
+   <<"   ||     / \\    "<<endl
+   <<"   ||   |IIIII|  "<<endl
+   <<"   ||   |     |  "<<endl
+   <<"  ==============="<<endl<<endl;
+}
+ else if(S==4)
+ {
+  cout<<endl<<endl
+   <<"   ++======+     "<<endl
+   <<"   ||            "<<endl
+   <<"   ||           "<<endl
+   <<"   ||            "<<endl
+   <<"   ||     /|\\    "<<endl
+   <<"   ||     / \\  "<<endl
+   <<"   ||   |IIIII|  "<<endl
+   <<"   ||   |     |  "<<endl
+   <<"  ==============="<<endl<<endl;
+ }
+ else if(S==3)
+ {
+ cout<<endl<<endl
+   <<"   ++======+     "<<endl
+   <<"   ||            "<<endl
+   <<"   ||           "<<endl
+   <<"   ||           "<<endl
+   <<"   ||      |     "<<endl
+   <<"   ||     / \\    "<<endl
+   <<"   ||   |IIIII|  "<<endl
+   <<"   ||   |     |  "<<endl
+   <<"  ==============="<<endl<<endl;
+ }
+else if(S==2)
+ {
+  cout<<endl<<endl
+   <<"   ++======+     "<<endl
+   <<"   ||            "<<endl
+   <<"   ||           "<<endl
+   <<"   ||            "<<endl
+   <<"   ||          "<<endl
+   <<"   ||     / \\    "<<endl
+   <<"   ||   |IIIII|  "<<endl
+   <<"   ||   |     |  "<<endl
+   <<"  ==============="<<endl<<endl;
+ }
+else if(S==1)
+ {
+  cout<<endl<<endl
+   <<"   ++======+     "<<endl
+   <<"   ||            "<<endl
+   <<"   ||           "<<endl
+   <<"   ||            "<<endl
+   <<"   ||          "<<endl
+   <<"   ||           "<<endl
+   <<"   ||   |IIIII|  "<<endl
+   <<"   ||   |     |  "<<endl
+   <<"  ==============="<<endl<<endl;
+ }
+else
+{
+cout<<endl<<endl
+   <<"   ++======+     "<<endl
+   <<"   ||            "<<endl
+   <<"   ||           "<<endl
+   <<"   ||            "<<endl
+   <<"   ||          "<<endl
+   <<"   ||           "<<endl
+   <<"   ||           "<<endl
+   <<"   ||           "<<endl
+   <<"  =============="<<endl<<endl;
+}
+
+}
+
+void G::f()
+{
+    int i=0;
+ do
+ {
+    const int MAX_WRONG = 8;  // maximum number of incorrect guesses allowed
+    wrong=0;
+
+    random_shuffle((words).begin(), (words).end());
+    THE_WORD = words[0];            // word to guess
+
+    soFar = string((THE_WORD).size(), '-');          // word guessed so far
+    used = "";                            // letters already guessed
+
+    // loop for current word
+    while ((wrong < MAX_WRONG) && (soFar != THE_WORD))
+    {
+        if((i++)!=0)
+        {
+        cout << "\n\nYou have " << (MAX_WRONG - wrong) << " incorrect guesses left.\n";
+        cout << "\nYou've used the following letters:\n" << used << endl;
+        }
+        else
+        {
+            cout<<"\nlets start the game"<<endl
+                <<"\nyou have 8 guesses"<<endl;
+                Draw(0);
+        }
+
+     cout << "\nSo far, the word is:\n" << soFar << endl;
+        used += askGuess(used);
+
+    } // end of while ((wrong < MAX_WRONG) && (soFar != THE_WORD))
+
+    // shut down
+    if (wrong == MAX_WRONG)
+    {
+      cout << "\nYou've been hanged!";
+    }
+    else
+    {
+        cout<<"\nYou are saved"<<endl;
+    }
+
+    cout << "\nThe word was " << THE_WORD << endl;
+}while(playAgain());
+
+}
+
+
+int main()
+{
+    srand(time(0));
+
+    cout << "Welcome to Hangman.  Good luck!\n";
+  G g;
+ g.f();
+
+return 0;
+}
+
